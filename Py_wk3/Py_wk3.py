@@ -48,13 +48,13 @@ ftr_selected = dict(zip(selected_words,selected_index))
 ftr_train = ftrmat[:,selected_index]
 #split the data into trian and test 0.8
 from sklearn.cross_validation import train_test_split
-xtrain,xtest,y_train,ytest = train_test_split(ftr_train,data_label,test_size=0.2)
+xtrain,xtest,ytrain,ytest = train_test_split(ftr_train,data_label,test_size=0.2)
 #Normalize the attribute value to mean=0 and sd =1
-from sklearn.preprocessing import StandardScaler
-scalar = StandardScaler()
-scalar.fit(xtrain)
-xtrain = scalar.transform(xtrain)
-xtest = scalar.transform(xtest)
+#from sklearn.preprocessing import StandardScaler
+#scalar = StandardScaler()
+#scalar.fit(xtrain)
+#xtrain = scalar.transform(xtrain)
+#xtest = scalar.transform(xtest)
 #build the classfier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import precision_recall_curve, f1_score
