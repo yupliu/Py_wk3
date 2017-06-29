@@ -20,9 +20,13 @@ data_all = pd.read_csv('d:\\ML_Learning\\amazon_baby.csv')
 data = data_all[data_all.rating!=3]
 #show the statistics of rating
 plt.hist(data.rating)
+plt.show()
+plt.close()
 data_label = data.rating >=4
 #show the statistics of label
 plt.hist(data_label)
+plt.show()
+plt.close()
 #change review to string
 #data['review'] = data['review'].astype('str')
 #split string
@@ -67,8 +71,13 @@ print(score)
 print(precision)
 print(recall)
 fig = plt.figure(figsize=(6,6))
-fig.convas.set_window_title("Amazon product classifier")
-plt.plot(recall,precision)
+fig.canvas.set_window_title("Amazon product classifier")
+plt.title('Precision-Recall Curves')
+plt.xlabel('Precision')
+plt.ylabel('Recall')
+plt.legend(loc='best')
+#plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,ncol=2, mode="expand", borderaxespad=0.)
+plt.plot(recall,precision,label=label)
 plt.show()
 plt.close()
 
