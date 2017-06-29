@@ -15,11 +15,18 @@ try:
 except ImportError:
     pass
 
-data = pd.read_csv('d:\\ML_Learning\\amazon_baby.csv')
+data_all = pd.read_csv('d:\\ML_Learning\\amazon_baby.csv')
+#remove all 3* review
+data = data_all[data_all.rating!=3]
+#show the statistics of rating
+plt.hist(data.rating)
+data_label = data.rating >=4
+#show the statistics of label
+plt.hist(data_label)
 #change review to string
 #data['review'] = data['review'].astype('str')
 #split string
-#data['review'] = data['review'].apply(lambda x: x.split())
+#data['review'] = data['review'].ftr_apply(lambda x: x.split())
 from sklearn.feature_extraction.text import CountVectorizer
 count_vect = CountVectorizer()
 #extract review into bag of words and count the frequency
@@ -37,9 +44,29 @@ for word in selected_words:
     selected_index.append(word_index)    
 #associate word with index
 ftr_selected = dict(zip(selected_words,selected_index))
-#extract ftr matrix
-for word in selected_words:
-    ftr_train.extend(ftrmat[ftr_selected[word]])
+#extract ftr matrix ???
+ftr_train = ftrmat[:,selected_index]
+#split the data into trian and test 0.8
+from sklearn.cross_validation import train_test_split
+xtrain,xtest,y_train,ytest = train_test_split(ftr_train,data_label,test_size=0.2)
+#Normalize the attribute value to mean=0 and sd =1
+from sklearn.preprocessing import StandardScaler
+scalar = StandardScaler()
+scalar.fit(xtrain)
+xtrain = scalar.transform(xtrain)
+xtest = scalar.transform(xtest)
+#build the classfier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import precision_recall_curve, f1_score
+classifier = LogisticRegression()
+classifier.fit(xtrain,ytrain)
+score = f1_score(ytest,classifier.predict(xtest))
+yprob = classifier.decision_function(xtest)
+precision,recall, _ = precision_recall_curve(ytest,yprob)
+print(score)
+print(precision)
+print(recall)
+
 
 
     
