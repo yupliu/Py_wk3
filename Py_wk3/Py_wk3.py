@@ -66,6 +66,11 @@ precision,recall, _ = precision_recall_curve(ytest,yprob)
 print(score)
 print(precision)
 print(recall)
+fig = plt.figure(figsize=(6,6))
+fig.convas.set_window_title("Amazon product classifier")
+plt.plot(recall,precision)
+plt.show()
+plt.close()
 
 
 
