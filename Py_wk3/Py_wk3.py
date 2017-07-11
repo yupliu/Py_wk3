@@ -15,10 +15,14 @@ try:
 except ImportError:
     pass
 
-data_all = pd.read_csv('d:\\ML_Learning\\amazon_baby.csv')
+data_all = pd.read_csv('C:\\Machine_Learning\\amazon_baby.csv')
 #remove all 3* review
 data = data_all[data_all.rating!=3]
 #show the statistics of rating
+
+#only extract product babytrend
+data = data[data.name == 'Baby Trend Diaper Champ']
+
 plt.hist(data.rating)
 plt.show()
 plt.close()
@@ -51,9 +55,10 @@ ftr_selected = dict(zip(selected_words,selected_index))
 ftr_selected_rev = dict(zip(selected_index,selected_words))
 #extract ftr matrix ???
 ftr_train = ftrmat[:,selected_index]
+#ftr_train = ftrmat
 #split the data into trian and test 0.8
 from sklearn.cross_validation import train_test_split
-xtrain,xtest,ytrain,ytest = train_test_split(ftr_train,data_label,test_size=0.2)
+xtrain,xtest,ytrain,ytest = train_test_split(ftr_train,data_label,test_size=0.2,random_state=0)
 #build the classfier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import precision_recall_curve, f1_score
@@ -90,11 +95,6 @@ minword = ftr_selected_rev[selected_index[coefficent.index(min(coefficent))]]
 maxword = ftr_selected_rev[selected_index[coefficent.index(max(coefficent))]]
 print("Most negative word is ",minword)
 print("Most positive word is ",maxword)
-
-
-
-
-    
 
 
 
