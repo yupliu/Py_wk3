@@ -1,0 +1,14 @@
+ccopy_reg
+_reconstructor
+p0
+(cgraphlab.toolkits.classifier.logistic_classifier
+LogisticClassifier
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+S'__proxy__'
+p6
