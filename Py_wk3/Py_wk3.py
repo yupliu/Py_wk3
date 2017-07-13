@@ -15,7 +15,7 @@ try:
 except ImportError:
     pass
 
-data_all = pd.read_csv('C:\\Machine_Learning\\amazon_baby.csv')
+data_all = pd.read_csv('D:\\ML_Learning\\amazon_baby.csv')
 #remove all 3* review
 data = data_all[data_all.rating!=3]
 #show the statistics of rating
