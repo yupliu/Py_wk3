@@ -40,4 +40,4 @@ selected_words_model = graphlab.load_model(selected_words_model_name)
 diaper_champ_reviews = products[products['name']=='Baby Trend Diaper Champ']
 diaper_champ_reviews['predict_sentiment'] = sentiment_model.predict(diaper_champ_reviews, output_type='probability')
 sentiment_result = diaper_champ_reviews.sort('predict_sentiment',ascending=False)
-selected_words_result = selected_words_model.predict(diaper_champ_reviews[0:1], output_type='probability')
+selected_words_result = selected_words_model.predict(sentiment_result[0:1], output_type='probability')
